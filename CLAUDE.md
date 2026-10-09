@@ -672,4 +672,4 @@ Keputusan ini diambil setelah prompt dicocokkan dengan proposal (Bab I–III). *
 
 | Tahap | Status |
 |---|---|
-| 0 | Kode dibuat, menunggu output Colab |
+| 0 | Revisi 1: `drive.mount` gagal (`ValueError: mount failed`); pengalihan stdout saat mount dihapus dan pesan petunjuk ditambahkan. Menunggu output Colab |
