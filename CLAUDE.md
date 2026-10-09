@@ -664,6 +664,8 @@ Keputusan ini diambil setelah prompt dicocokkan dengan proposal (Bab I–III). *
 
 **Verifikasi lokal (9 Oktober 2026):** kode acuan Bagian 6 dijalankan ulang pada `data_wonder_bybni_3.xlsx` di lingkungan Claude Code (Python 3.13, pandas 3.0.5). Hasilnya **56 dari 56 target Tahap 1–8 cocok**.
 
+**Keputusan teknis Tahap 2 (9 Oktober 2026):** `lib/wondr_teks.py` ditulis di **Tahap 2**, tempat pola teks pertama kali dibutuhkan (prinsip Bagian 3.2), bukan di Tahap 5. Tahap 5–7 cukup meng-*import*. Semua karakter non-ASCII pada pola `EMO` dan `SIMBOL` ditulis sebagai *escape* (perluasan Keputusan no. 9). Sidik jari SHA-256 (16 digit awal) dari empat pola Bagian 6 = `26c43d7121739a69`; Tahap 2 mengecek nilai ini.
+
 ## 10. Catatan repositori
 
 - Notebook: `skripsi_wondr_v2.ipynb` di akar repo. Setiap tahap berisi 1 sel markdown dan 1–2 sel kode.
@@ -673,6 +675,7 @@ Keputusan ini diambil setelah prompt dicocokkan dengan proposal (Bab I–III). *
 | Tahap | Status |
 |---|---|
 | 0 | ✅ Selesai (revisi 1). Semua 6 cek ✅ |
-| 1 | Kode dibuat, menunggu output Colab |
+| 1 | ✅ Selesai. Semua 6 cek ✅ |
+| 2 | Kode dibuat (2 sel: `%%writefile lib/wondr_teks.py` + audit), menunggu output Colab |
 
 **Lingkungan Colab (dari output Tahap 0):** Python 3.13.15 · Tesla T4 14,6 GB · CUDA 13.0 · cuDNN 92700 · numpy 2.1.3 · pandas 2.2.3 · torch 2.11.0+cu130 · transformers 5.18.0 · tokenizers 0.23.2 · scikit-learn 1.6.1 · scipy 1.16.3 · matplotlib 3.10.0 · openpyxl 3.1.5 · pyarrow 23.0.1. Verifikasi lokal ulang dengan versi numpy/pandas/scipy/scikit-learn/pyarrow yang sama: 56/56 target Tahap 1–8 cocok.
