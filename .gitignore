@@ -1,0 +1,13 @@
+# Data dan hasil antar-tahap tidak di-commit (dataset memuat kolom nama pengulas)
+*.xlsx
+*.parquet
+*.npz
+data/
+hasil/
+log/
+bab4/
+
+# Berkas sementara
+__pycache__/
+.ipynb_checkpoints/
+*.tmp
