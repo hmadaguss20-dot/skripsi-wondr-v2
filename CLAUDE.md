@@ -15,7 +15,7 @@ Tugasmu adalah membangun program penelitian sebagai notebook Google Colab yang *
 Satu tahap naskah boleh dipecah menjadi beberapa **subtahap** (misalnya 8.1, 8.2, 8.3) supaya setiap sel pendek dan keluarannya mudah dipahami. Nomor tahap utama selalu sama dengan nomor tahap di Bab III.
 
 **Lingkungan**
-- Google Colab dengan GPU **T4**. Seluruh pelatihan dijalankan di GPU yang sama, karena Bab III menulis T4.
+- Google Colab dengan GPU **A100** (keputusan pengguna 21 Oktober 2026, menggantikan T4; Bab III perlu disesuaikan). Seluruh pelatihan dijalankan di GPU yang sama.
 - Folder kerja baru di Google Drive: `MyDrive/skripsi_wondr_v3/`. Folder lama tidak boleh ditimpa.
 - Data mentah `data_wonder_bybni_3.xlsx` (7.204 baris), saya salin ke `skripsi_wondr_v3/data/`.
 - Kamu menulis kodenya, saya menjalankannya di Colab, lalu menempelkan output ke sini.
@@ -192,7 +192,7 @@ Yang ditandai *(program saja)* tetap dijalankan dan disimpan, tetapi tidak dibah
 - **Proses:**
   - *mount* Google Drive dan buat struktur folder (3.1);
   - cek berkas data ada;
-  - cek GPU (nama dan memori), dan beri ⚠️ kalau bukan T4;
+  - cek GPU (nama dan memori), dan beri ⚠️ kalau bukan A100;
   - atur variabel lingkungan untuk determinisme dan matikan kebisingan (3.3–3.4);
   - instal hanya package yang belum ada (`pip install -q`).
 - **Tampilkan:** tabel package dan versinya, nama GPU, dan path folder kerja.
@@ -684,6 +684,12 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 - Dataset dan berkas hasil (`*.xlsx`, `*.parquet`, `*.npz`, `data/`, `hasil/`, `log/`, `bab4/`, `anotasi/`) **tidak** di-*commit* karena memuat kolom `nama` dan teks ulasan (lihat `.gitignore`).
 - Cabang kerja: `claude/new-session-xc71do`. Lakukan *commit* dan *push* setelah setiap subtahap.
 
+**Keputusan tambahan (disetujui pengguna):**
+
+| No. | Tanggal | Hal | Keputusan | Subtahap |
+|---|---|---|---|---|
+| 1 | 21-10-2026 | GPU | A100 menggantikan T4 untuk seluruh subtahap. Acuan determinisme di `log/versi_package.json` adalah sesi A100 pertama. Naskah Bab III yang masih menulis T4 perlu disesuaikan | 0.1, semua |
+
 | Subtahap | Status |
 |---|---|
-| 0.1 | Kode dibuat (2 sel), menunggu output Colab |
+| 0.1 | Revisi 1 (GPU A100): sel 2/2 diubah, menunggu output Colab |
