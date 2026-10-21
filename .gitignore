@@ -8,6 +8,9 @@ log/
 bab4/
 anotasi/
 
+# Naskah proposal tidak di-commit karena repo publik
+naskah/
+
 # Berkas sementara
 __pycache__/
 .ipynb_checkpoints/
