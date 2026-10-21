@@ -731,7 +731,8 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 | 4 | ✅ Selesai (revisi 1: contoh langkah 4 diperjelas + 2 cek invarian). Semua 7 cek ✅; output Colab sama persis dengan uji lokal |
 | 5 | ✅ Selesai. Semua 7 cek ✅ |
 | 6.1 | ✅ Output Colab 6/6 ✅; dinyatakan valid setelah audit kebocoran 6.2 (diminta pengguna) |
-| 6.2 | Kode dibuat (2 sel, 36 + 37 baris), lokal dengan data asli 7/7 + 5/5 ✅ (0 kebocoran), menunggu output Colab |
+| 6.2 | ✅ Selesai. 7 + 5 cek ✅; 0 kebocoran. Data uji dikunci |
+| 7 | Kode dibuat (2 sel, 43 + 29 baris). Angka **tidak** bisa diverifikasi lokal karena huggingface.co diblokir jaringan sesi; alur kode diuji dengan tokenizer pengganti. Menunggu output Colab |
 
 **Catatan kerja:** saat menulis berkas lewat alat, urutan `\uXXXX` dapat berubah menjadi karakter aslinya. Setelah menulis sel yang memuat *escape* Unicode, periksa bahwa barisnya ASCII murni (pernah terjadi di Tahap 4 dan sudah diperbaiki).
 
