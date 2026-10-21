@@ -736,7 +736,7 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 | 6.1 | ✅ Output Colab 6/6 ✅; dinyatakan valid setelah audit kebocoran 6.2 (diminta pengguna) |
 | 6.2 | ✅ Selesai. 7 + 5 cek ✅; 0 kebocoran. Data uji dikunci |
 | 7 | ✅ Selesai. 4 + 3 cek ✅ + pemeriksaan akhir 8/8 ✅: L_max 128 dari latih saja; BertTokenizer 30.521 cocok dengan Tabel 2.14 dan 2.5.2; hanya 2741 terpotong (141 → 128); *padding* per *batch*. Tahap 0.1 revisi 2 menyenyapkan log HF Hub |
-| 8.1 | Kode dibuat (`%%writefile lib/wondr_latih.py` + uji cepat 40 baris). Lokal (torch 2.11 CPU, BERT mini): uji cepat 5/5 ✅ (GPU ⚠️ wajar), uji logika *early stopping*/jadwal (2.20)/grup *weight decay* lolos. Menunggu output Colab |
+| 8.1 | Output Colab: 5 ✅ + 1 ⚠️ (memori GPU sisa 65,0 MB). Penyebab: ruang kerja cuBLAS yang disimpan PyTorch untuk dipakai ulang (`:4096:8` = 32 MiB × 2 *handle* per *thread* forward/backward + 1 MiB cuBLASLt = 65 MiB), bukan kebocoran. Revisi 1 sel 2/2: memori dicatat per pelatihan, cek tidak bertambah antar-pelatihan, dan sisa setelah `torch._C._cuda_clearCublasWorkspaces()`. `lib/wondr_latih.py` tidak berubah. Menunggu output Colab |
 
 **Catatan kerja:** saat menulis berkas lewat alat, urutan `\uXXXX` dapat berubah menjadi karakter aslinya. Setelah menulis sel yang memuat *escape* Unicode, periksa bahwa barisnya ASCII murni (pernah terjadi di Tahap 4 dan sudah diperbaiki).
 
