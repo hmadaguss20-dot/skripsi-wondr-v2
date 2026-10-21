@@ -729,7 +729,8 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 | 2 | ✅ Selesai. Semua 5 cek ✅ |
 | 3 | ✅ Selesai. Semua 5 cek ✅ |
 | 4 | ✅ Selesai (revisi 1: contoh langkah 4 diperjelas + 2 cek invarian). Semua 7 cek ✅; output Colab sama persis dengan uji lokal |
-| 5 | Kode dibuat (1 sel, 49 baris), lokal dengan data asli 7/7 ✅, menunggu output Colab |
+| 5 | ✅ Selesai. Semua 7 cek ✅ |
+| 6.1 | Kode dibuat (1 sel, 40 baris), lokal dengan data asli 6/6 ✅, menunggu output Colab |
 
 **Catatan kerja:** saat menulis berkas lewat alat, urutan `\uXXXX` dapat berubah menjadi karakter aslinya. Setelah menulis sel yang memuat *escape* Unicode, periksa bahwa barisnya ASCII murni (pernah terjadi di Tahap 4 dan sudah diperbaiki).
 
