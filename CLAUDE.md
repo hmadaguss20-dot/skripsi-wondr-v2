@@ -727,7 +727,7 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 | 1.2 | ✅ Selesai. Semua 13 cek ✅ |
 | 2 | ✅ Selesai. Semua 5 cek ✅ |
 | 3 | ✅ Selesai. Semua 5 cek ✅ |
-| 4 | Output Colab pertama 5/5 ✅, tetapi contoh langkah 4 menyesatkan (hanya langkah 4 + pemotongan 60 karakter). Revisi 1: contoh menampilkan kata yang berubah dan hasil 6 langkah tanpa pemotongan, ditambah 2 cek invarian (sisa pola = 0; `text_clean` = `bersihkan(ulasan)`). Hasil data identik. Lokal 7/7 ✅, menunggu output Colab |
+| 4 | ✅ Selesai (revisi 1: contoh langkah 4 diperjelas + 2 cek invarian). Semua 7 cek ✅; output Colab sama persis dengan uji lokal |
 
 **Catatan kerja:** saat menulis berkas lewat alat, urutan `\uXXXX` dapat berubah menjadi karakter aslinya. Setelah menulis sel yang memuat *escape* Unicode, periksa bahwa barisnya ASCII murni (pernah terjadi di Tahap 4 dan sudah diperbaiki).
 
