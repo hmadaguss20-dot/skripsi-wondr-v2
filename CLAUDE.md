@@ -736,7 +736,8 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 | 6.1 | ✅ Output Colab 6/6 ✅; dinyatakan valid setelah audit kebocoran 6.2 (diminta pengguna) |
 | 6.2 | ✅ Selesai. 7 + 5 cek ✅; 0 kebocoran. Data uji dikunci |
 | 7 | ✅ Selesai. 4 + 3 cek ✅ + pemeriksaan akhir 8/8 ✅: L_max 128 dari latih saja; BertTokenizer 30.521 cocok dengan Tabel 2.14 dan 2.5.2; hanya 2741 terpotong (141 → 128); *padding* per *batch*. Tahap 0.1 revisi 2 menyenyapkan log HF Hub |
-| 8.1 | Uji cepat: 5 cek fungsional ✅ di Colab (T/T_w, parameter baru, dua pelatihan identik di GPU, peluang, perangkat cuda). Cek memori revisi 1 keliru: "sisa" = selisih terhadap awal (−65 MB) karena awal sudah memuat ruang kerja cuBLAS dari *run* sebelumnya. Revisi 2: cek memori dipindah ke sel tambahan "Uji memori GPU" (4 metrik × 4 titik: teralokasi, dicadangkan, tensor CUDA hidup, terpakai menurut *driver*), diuji logikanya dengan *allocator* tiruan (normal ✅, bocor ⚠️). Menunggu output Colab |
+| 8.1 | ✅ Selesai (revisi 2). Uji cepat 5 cek ✅ (T/T_w 764/76, parameter baru hanya `classifier.*`, dua pelatihan *seed* sama identik di GPU, peluang di [0, 1], cuda). Uji memori GPU 5 cek ✅: teralokasi 0 → 65 → 65 → 0 MB (65 MB = ruang kerja cuBLAS), dicadangkan 0 → 596 → 596 → 0 MB (cache *allocator* yang ditahan segmen ruang kerja; stabil, bukan kebocoran), tensor CUDA hidup 0, terpakai *driver* 570 → 1.166 → 1.166 → 570 MB. `lib/wondr_latih.py` tidak diubah |
+| 8.2 | Sel ditulis dan diuji lokal (CPU, BERT mini, data tahap06 asli): 6 cek ✅; berkas yang dirusak memicu 5 ⚠️; lanjut-dari-berkas menghasilkan peluang identik. Menunggu persetujuan (GPU ±5–15 menit) dan output Colab |
 
 **Catatan kerja:** saat menulis berkas lewat alat, urutan `\uXXXX` dapat berubah menjadi karakter aslinya. Setelah menulis sel yang memuat *escape* Unicode, periksa bahwa barisnya ASCII murni (pernah terjadi di Tahap 4 dan sudah diperbaiki).
 
