@@ -722,6 +722,7 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 | Subtahap | Status |
 |---|---|
 | 0.1 | ✅ Selesai (revisi 1, A100). Semua 4 cek ✅ |
-| 0.2 | Kode dibuat (2 sel). Sel 1/2 sudah dijalankan; sel 2/2 direvisi (kunci `TARGET` dan rujukan tahap di `CFG` mengikuti Bab III), menunggu output Colab |
+| 0.2 | ✅ Selesai (revisi 1: kunci `TARGET` mengikuti Bab III). Semua 4 cek ✅ |
+| 1.1 | Kode dibuat (1 sel), menunggu output Colab |
 
 **Lingkungan Colab (output Tahap 0.1, 21 Oktober 2026):** Python 3.13.15 · NVIDIA A100-SXM4-40GB 39,5 GB · CUDA 13.0 · cuDNN 92700 · numpy 2.1.3 · pandas 2.2.3 · torch 2.11.0+cu130 · transformers 5.20.1 · tokenizers 0.23.3 · scikit-learn 1.6.1 · scipy 1.16.3 · matplotlib 3.10.0 · openpyxl 3.1.5 · pyarrow 23.0.1.
