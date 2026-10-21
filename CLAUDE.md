@@ -722,7 +722,7 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 
 | Subtahap | Status |
 |---|---|
-| 0.1 | ✅ Selesai (revisi 1, A100). Semua 4 cek ✅ |
+| 0.1 | ✅ Selesai (revisi 1, A100). Semua 4 cek ✅. Revisi 2 (Tahap 7): log HF Hub disenyapkan; versi `huggingface-hub` ikut dicatat |
 | 0.2 | ✅ Selesai (revisi 1: kunci `TARGET` mengikuti Bab III). Semua 4 cek ✅ |
 | 1.1 | ✅ Selesai. Semua 6 cek ✅ |
 | 1.2 | ✅ Selesai. Semua 13 cek ✅ |
@@ -732,7 +732,7 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 | 5 | ✅ Selesai. Semua 7 cek ✅ |
 | 6.1 | ✅ Output Colab 6/6 ✅; dinyatakan valid setelah audit kebocoran 6.2 (diminta pengguna) |
 | 6.2 | ✅ Selesai. 7 + 5 cek ✅; 0 kebocoran. Data uji dikunci |
-| 7 | Kode dibuat (2 sel, 43 + 29 baris). Angka **tidak** bisa diverifikasi lokal karena huggingface.co diblokir jaringan sesi; alur kode diuji dengan tokenizer pengganti. Menunggu output Colab |
+| 7 | Output Colab 4 + 3 cek ✅ (L_max 128; terpotong hanya 2741). Muncul *warning* HF Hub "unauthenticated requests": Tahap 0.1 revisi 2 menambah `HF_HUB_VERBOSITY=error` dan `huggingface_hub.utils.logging.set_verbosity_error()`. Sel pemeriksaan akhir tambahan (identitas *tokenizer* vs Tabel 2.14, pemotongan, *padding*) menunggu output Colab |
 
 **Catatan kerja:** saat menulis berkas lewat alat, urutan `\uXXXX` dapat berubah menjadi karakter aslinya. Setelah menulis sel yang memuat *escape* Unicode, periksa bahwa barisnya ASCII murni (pernah terjadi di Tahap 4 dan sudah diperbaiki).
 
