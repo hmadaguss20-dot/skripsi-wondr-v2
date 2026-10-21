@@ -726,7 +726,10 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 | 1.1 | ✅ Selesai. Semua 6 cek ✅ |
 | 1.2 | ✅ Selesai. Semua 13 cek ✅ |
 | 2 | ✅ Selesai. Semua 5 cek ✅ |
-| 3 | Kode dibuat (1 sel, 47 baris, dengan gambar), lokal dengan data asli 5/5 ✅, menunggu output Colab |
+| 3 | ✅ Selesai. Semua 5 cek ✅ |
+| 4 | Kode dibuat (1 sel, 50 baris), lokal dengan data asli 5/5 ✅, menunggu output Colab |
+
+**Catatan kerja:** saat menulis berkas lewat alat, urutan `\uXXXX` dapat berubah menjadi karakter aslinya. Setelah menulis sel yang memuat *escape* Unicode, periksa bahwa barisnya ASCII murni (pernah terjadi di Tahap 4 dan sudah diperbaiki).
 
 **Verifikasi lokal dengan data asli (21-10-2026):** `data_wonder_bybni_3.xlsx` dari pengguna (SHA-256 awal `1bbda628c39b0095`; tidak di-*commit*), dijalankan dengan versi numpy/pandas/scikit-learn/scipy/pyarrow/openpyxl/matplotlib yang sama dengan Colab. Sel 1.1: 6/6 cek ✅. Kode acuan Bagian 7: perubahan per langkah 55 · 404 · 1.518 · 227 · 634 · 403; kosong 63 (*rating* 5: 57, 4: 6); 7.141 → 4.372 kunci (8 seri) → 4.364 dokumen → 4.293 grup → latih 3.051 (1.303/1.748) · validasi 657 (282/375) · uji 656 (280/376); kelima kembaran-dekat di uji. Semua cocok dengan target.
 
