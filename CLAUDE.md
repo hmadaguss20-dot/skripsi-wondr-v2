@@ -680,11 +680,11 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 
 - Notebook v3: `skripsi_wondr_v3.ipynb` di akar repo. Setiap subtahap berisi 1 sel markdown (judul, dasar naskah, package) dan 1–2 sel kode.
 - `skripsi_wondr_v2.ipynb` adalah program versi sebelumnya (Tahap 0–2 versi lama). Berkas ini tidak diubah lagi dan hanya disimpan sebagai arsip.
-- PDF proposal diharapkan berada di `naskah/Revisi_Proposal_Aas_Bu_Anggi.pdf`.
+- PDF proposal ada di `naskah/Revisi_Proposal_Aas_Bu_Anggi.pdf`, tetapi **tidak** di-*commit* (`naskah/` di `.gitignore`) karena repo publik. Di sesi baru, PDF perlu dilampirkan ulang.
 - Dataset dan berkas hasil (`*.xlsx`, `*.parquet`, `*.npz`, `data/`, `hasil/`, `log/`, `bab4/`, `anotasi/`) **tidak** di-*commit* karena memuat kolom `nama` dan teks ulasan (lihat `.gitignore`).
 - Cabang kerja: `claude/new-session-xc71do`. Lakukan *commit* dan *push* setelah setiap subtahap.
 
-**Keputusan tambahan (disetujui pengguna):**
+**Keputusan tambahan.** Kalau bertentangan dengan Bagian 1–9, **Bagian 10 yang berlaku**. Naskah (PDF) sudah dicocokkan dengan prompt pada 21-10-2026.
 
 | No. | Tanggal | Hal | Keputusan | Subtahap |
 |---|---|---|---|---|
@@ -693,10 +693,35 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 | 3 | 21-10-2026 | KT-2 determinisme | `atur_seed()` juga menjalankan `torch.use_deterministic_algorithms(True)` | 0.2, pelatihan |
 | 4 | 21-10-2026 | KT-3 TF32 | `atur_seed()` mematikan TF32: `torch.backends.cuda.matmul.allow_tf32 = False` dan `torch.backends.cudnn.allow_tf32 = False`. Dipakai API lama karena di torch 2.11 API ini ikut mengatur API baru (`fp32_precision`); API baru saja tidak mematikan TF32 pada konvolusi/RNN cuDNN | 0.2, pelatihan |
 | 5 | 21-10-2026 | KT-4 susunan 0.2 | Fungsi bantu ditulis ke `lib/bantu.py` (`%%writefile`), supaya modul `lib/` lain (misalnya `wondr_latih.py`) bisa meng-*import* `atur_seed()`. Sel 2/2 berisi `PATH`, `CFG`, dan `TARGET` (sekitar 75 baris, hampir semuanya data konfigurasi) | 0.2 |
+| 6 | 21-10-2026 | Nomor tahap | Nomor tahap utama mengikuti Bab III naskah (15 tahap). Tahap deskriptif yang tidak ada di naskah tetap dijalankan sebagai subtahap *program saja* (jawaban pengguna). Eksplorasi Data (Tahap 10 di Bagian 5–6) menjadi **9.4**; peta lengkap di bawah | semua |
+| 7 | 21-10-2026 | `review_id` | Dibuat di **Tahap 2** (Seleksi Atribut) sesuai Bab III tahap 2; Tahap 1.1 hanya membuang kolom `Unnamed*`. Angka tidak berubah. *Rekomendasi yang mengikuti naskah; pertanyaannya tidak dijawab sehingga dipakai sebagai bawaan (sama dengan keputusan v2 no. 6)* | 1.1, 2 |
+| 8 | 21-10-2026 | *Global best* PSO | Mengikuti pers. (2.29) dan Algoritma 2.1: λS diperbarui per partikel sesuai urutan evaluasi, hanya jika lebih besar ketat; kalau seri posisi lama dipertahankan. Menggantikan `g = P[argmax fP]`. *Bawaan yang mengikuti naskah (sama dengan keputusan v2 no. 4)* | 12.1 |
+| 9 | 21-10-2026 | Arah δ | δ = skema baru − skema lama: RS − *default*, PSO − *default*, PSO − RS; pada (2.43) A dibaca sebagai skema yang lebih baru. Keputusan signifikan tidak berubah. *Bawaan (sama dengan keputusan v2 no. 2)* | 15 |
+
+**Peta nomor tahap (Bagian 5–6 → program = Bab III).** Awalan nama berkas `tahapXX_` mengikuti nomor baru. Rujukan nomor di Bagian 2–6 (larangan, subtahap GPU, cek determinisme) dibaca dengan peta ini; misalnya "*random search*/PSO sebelum Tahap 11 selesai" menjadi Tahap 10, dan subtahap GPU lama menjadi 8.2, 10, 11, 12.1, 13.
+
+| Bagian 5–6 | Program | Berkas keluaran |
+|---|---|---|
+| 10 Eksplorasi Data | **9.4** (*program saja*) | `bab4/tabel/tahap09_eksplorasi_*.csv`, `bab4/gambar/tahap09_proporsi_label.png`, `hasil/tahap09_acuan.json` |
+| 11 *Fine-tuning* skema *default* | **10** | `hasil/tahap10_default.json` |
+| 12 *Random search* | **11** | `log/rs_state.json`, `hasil/tahap11_rs.csv`, `bab4/tabel/tahap11_rs_top5.csv` |
+| 13.1 / 13.2 / 13.3 PSO | **12.1 / 12.2 / 12.3** | `log/pso_state.json`, `hasil/tahap12_pso.csv`, `bab4/tabel/tahap12_iterasi.csv`, `bab4/gambar/tahap12_konvergensi.png`, `hasil/tahap12_ragam.json` |
+| 14 Pelatihan model akhir | **13** | `hasil/tahap13_prediksi.parquet`, `hasil/tahap13_model.json` |
+| 15.1 / 15.2 / 15.3 Evaluasi | **14.1 / 14.2 / 14.3** | `bab4/tabel/tahap14_*.csv`, `hasil/tahap14_ansambel.parquet`, `bab4/gambar/tahap14_cm_ansambel.png` |
+| 16 Uji signifikansi | **15** | `bab4/tabel/tahap15_signifikansi.csv`, `hasil/tahap15_bootstrap.npz`, `bab4/gambar/tahap15_bootstrap.png` |
+
+**Belum diputuskan (tanyakan sebelum Tahap 11):** Bab III tahap 14 (Evaluasi) meminta "jumlah evaluasi dan waktu komputasi setiap metode optimasi". Usulan: durasi setiap pelatihan (`detik42`, `detik43`) disimpan di CSV *random search* dan PSO, lalu Tahap 14 menambah tabel waktu.
+
+**Catatan untuk naskah (program tetap):**
+- Bab III: "enam belas tahap" → "lima belas tahap"; tahap 10 masih menulis GPU NVIDIA T4 → A100.
+- Bab I: kontribusi "pernyataan batas selisih yang dapat dideteksi oleh ukuran data" masih tertulis, padahal analisis daya sudah dihapus.
+- Tabel 2.2–2.3: simbol bintang tercetak sebagai ⋆ (U+22C6, *star operator*), yang **tidak** dihapus oleh pola `EMO`/`SIMBOL`; gunakan ★ (U+2605), misalnya `$\bigstar$`.
+- Bab III tahap 14 belum menyebut kesesuaian label *rating* dengan label manual pada data uji (subtahap 14.3).
+- Dibahas di Tahap 8.1: pers. (2.14) memakai h[CLS] langsung, sedangkan `AutoModelForSequenceClassification` melewatkannya ke *pooler* (dense + tanh hasil prapelatihan); pers. (2.18) menulis *weight decay* untuk seluruh θ.
 
 | Subtahap | Status |
 |---|---|
 | 0.1 | ✅ Selesai (revisi 1, A100). Semua 4 cek ✅ |
-| 0.2 | Kode dibuat (2 sel: `%%writefile lib/bantu.py` + konfigurasi), menunggu output Colab |
+| 0.2 | Kode dibuat (2 sel). Sel 1/2 sudah dijalankan; sel 2/2 direvisi (kunci `TARGET` dan rujukan tahap di `CFG` mengikuti Bab III), menunggu output Colab |
 
 **Lingkungan Colab (output Tahap 0.1, 21 Oktober 2026):** Python 3.13.15 · NVIDIA A100-SXM4-40GB 39,5 GB · CUDA 13.0 · cuDNN 92700 · numpy 2.1.3 · pandas 2.2.3 · torch 2.11.0+cu130 · transformers 5.20.1 · tokenizers 0.23.3 · scikit-learn 1.6.1 · scipy 1.16.3 · matplotlib 3.10.0 · openpyxl 3.1.5 · pyarrow 23.0.1.
