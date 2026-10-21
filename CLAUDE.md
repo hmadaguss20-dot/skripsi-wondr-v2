@@ -697,6 +697,7 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 | 7 | 21-10-2026 | `review_id` | Dibuat di **Tahap 2** (Seleksi Atribut) sesuai Bab III tahap 2; Tahap 1.1 hanya membuang kolom `Unnamed*`. Angka tidak berubah. *Rekomendasi yang mengikuti naskah; pertanyaannya tidak dijawab sehingga dipakai sebagai bawaan (sama dengan keputusan v2 no. 6)* | 1.1, 2 |
 | 8 | 21-10-2026 | *Global best* PSO | Mengikuti pers. (2.29) dan Algoritma 2.1: λS diperbarui per partikel sesuai urutan evaluasi, hanya jika lebih besar ketat; kalau seri posisi lama dipertahankan. Menggantikan `g = P[argmax fP]`. *Bawaan yang mengikuti naskah (sama dengan keputusan v2 no. 4)* | 12.1 |
 | 9 | 21-10-2026 | Arah δ | δ = skema baru − skema lama: RS − *default*, PSO − *default*, PSO − RS; pada (2.43) A dibaca sebagai skema yang lebih baru. Keputusan signifikan tidak berubah. *Bawaan (sama dengan keputusan v2 no. 2)* | 15 |
+| 10 | 21-10-2026 | Kunci seri deduplikasi | Tetap **dikeluarkan** sesuai Bab III tahap 5 dan Tabel 2.11 (pilihan pengguna). Alternatif mempertahankan lalu menganotasi ditolak karena 7 grup tambahan menggeser pengacak `bagi_data()` sehingga seluruh pembagian berubah (kembaran-dekat tidak lagi di uji). Tahap 5 menampilkan tabel 8 kunci seri (16 ulasan) sebagai *program saja*: bukti *rating* tidak sesuai isi teks | 5 |
 
 **Peta nomor tahap (Bagian 5–6 → program = Bab III).** Awalan nama berkas `tahapXX_` mengikuti nomor baru. Rujukan nomor di Bagian 2–6 (larangan, subtahap GPU, cek determinisme) dibaca dengan peta ini; misalnya "*random search*/PSO sebelum Tahap 11 selesai" menjadi Tahap 10, dan subtahap GPU lama menjadi 8.2, 10, 11, 12.1, 13.
 
@@ -728,6 +729,7 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 | 2 | ✅ Selesai. Semua 5 cek ✅ |
 | 3 | ✅ Selesai. Semua 5 cek ✅ |
 | 4 | ✅ Selesai (revisi 1: contoh langkah 4 diperjelas + 2 cek invarian). Semua 7 cek ✅; output Colab sama persis dengan uji lokal |
+| 5 | Kode dibuat (1 sel, 49 baris), lokal dengan data asli 7/7 ✅, menunggu output Colab |
 
 **Catatan kerja:** saat menulis berkas lewat alat, urutan `\uXXXX` dapat berubah menjadi karakter aslinya. Setelah menulis sel yang memuat *escape* Unicode, periksa bahwa barisnya ASCII murni (pernah terjadi di Tahap 4 dan sudah diperbaiki).
 
