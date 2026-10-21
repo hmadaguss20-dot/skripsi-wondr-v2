@@ -725,4 +725,6 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 | 0.2 | ✅ Selesai (revisi 1: kunci `TARGET` mengikuti Bab III). Semua 4 cek ✅ |
 | 1.1 | Kode dibuat (1 sel), menunggu output Colab |
 
+**Verifikasi lokal dengan data asli (21-10-2026):** `data_wonder_bybni_3.xlsx` dari pengguna (SHA-256 awal `1bbda628c39b0095`; tidak di-*commit*), dijalankan dengan versi numpy/pandas/scikit-learn/scipy/pyarrow/openpyxl/matplotlib yang sama dengan Colab. Sel 1.1: 6/6 cek ✅. Kode acuan Bagian 7: perubahan per langkah 55 · 404 · 1.518 · 227 · 634 · 403; kosong 63 (*rating* 5: 57, 4: 6); 7.141 → 4.372 kunci (8 seri) → 4.364 dokumen → 4.293 grup → latih 3.051 (1.303/1.748) · validasi 657 (282/375) · uji 656 (280/376); kelima kembaran-dekat di uji. Semua cocok dengan target.
+
 **Lingkungan Colab (output Tahap 0.1, 21 Oktober 2026):** Python 3.13.15 · NVIDIA A100-SXM4-40GB 39,5 GB · CUDA 13.0 · cuDNN 92700 · numpy 2.1.3 · pandas 2.2.3 · torch 2.11.0+cu130 · transformers 5.20.1 · tokenizers 0.23.3 · scikit-learn 1.6.1 · scipy 1.16.3 · matplotlib 3.10.0 · openpyxl 3.1.5 · pyarrow 23.0.1.
