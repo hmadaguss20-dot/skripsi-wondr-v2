@@ -689,7 +689,14 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 | No. | Tanggal | Hal | Keputusan | Subtahap |
 |---|---|---|---|---|
 | 1 | 21-10-2026 | GPU | A100 menggantikan T4 untuk seluruh subtahap. Acuan determinisme di `log/versi_package.json` adalah sesi A100 pertama. Naskah Bab III yang masih menulis T4 perlu disesuaikan | 0.1, semua |
+| 2 | 21-10-2026 | KT-1 log versi | `log/versi_package.json` menyimpan `pertama` (sesi A100 pertama) dan `terbaru`; ⚠️ bila versi torch/transformers/tokenizers atau GPU berubah | 0.1 |
+| 3 | 21-10-2026 | KT-2 determinisme | `atur_seed()` juga menjalankan `torch.use_deterministic_algorithms(True)` | 0.2, pelatihan |
+| 4 | 21-10-2026 | KT-3 TF32 | `atur_seed()` mematikan TF32: `torch.backends.cuda.matmul.allow_tf32 = False` dan `torch.backends.cudnn.allow_tf32 = False`. Dipakai API lama karena di torch 2.11 API ini ikut mengatur API baru (`fp32_precision`); API baru saja tidak mematikan TF32 pada konvolusi/RNN cuDNN | 0.2, pelatihan |
+| 5 | 21-10-2026 | KT-4 susunan 0.2 | Fungsi bantu ditulis ke `lib/bantu.py` (`%%writefile`), supaya modul `lib/` lain (misalnya `wondr_latih.py`) bisa meng-*import* `atur_seed()`. Sel 2/2 berisi `PATH`, `CFG`, dan `TARGET` (sekitar 75 baris, hampir semuanya data konfigurasi) | 0.2 |
 
 | Subtahap | Status |
 |---|---|
-| 0.1 | Revisi 1 (GPU A100): sel 2/2 diubah, menunggu output Colab |
+| 0.1 | ✅ Selesai (revisi 1, A100). Semua 4 cek ✅ |
+| 0.2 | Kode dibuat (2 sel: `%%writefile lib/bantu.py` + konfigurasi), menunggu output Colab |
+
+**Lingkungan Colab (output Tahap 0.1, 21 Oktober 2026):** Python 3.13.15 · NVIDIA A100-SXM4-40GB 39,5 GB · CUDA 13.0 · cuDNN 92700 · numpy 2.1.3 · pandas 2.2.3 · torch 2.11.0+cu130 · transformers 5.20.1 · tokenizers 0.23.3 · scikit-learn 1.6.1 · scipy 1.16.3 · matplotlib 3.10.0 · openpyxl 3.1.5 · pyarrow 23.0.1.
