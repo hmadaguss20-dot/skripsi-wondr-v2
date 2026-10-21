@@ -698,6 +698,9 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 | 8 | 21-10-2026 | *Global best* PSO | Mengikuti pers. (2.29) dan Algoritma 2.1: λS diperbarui per partikel sesuai urutan evaluasi, hanya jika lebih besar ketat; kalau seri posisi lama dipertahankan. Menggantikan `g = P[argmax fP]`. *Bawaan yang mengikuti naskah (sama dengan keputusan v2 no. 4)* | 12.1 |
 | 9 | 21-10-2026 | Arah δ | δ = skema baru − skema lama: RS − *default*, PSO − *default*, PSO − RS; pada (2.43) A dibaca sebagai skema yang lebih baru. Keputusan signifikan tidak berubah. *Bawaan (sama dengan keputusan v2 no. 2)* | 15 |
 | 10 | 21-10-2026 | Kunci seri deduplikasi | Tetap **dikeluarkan** sesuai Bab III tahap 5 dan Tabel 2.11 (pilihan pengguna). Alternatif mempertahankan lalu menganotasi ditolak karena 7 grup tambahan menggeser pengacak `bagi_data()` sehingga seluruh pembagian berubah (kembaran-dekat tidak lagi di uji). Tahap 5 menampilkan tabel 8 kunci seri (16 ulasan) sebagai *program saja*: bukti *rating* tidak sesuai isi teks | 5 |
+| 11 | 21-10-2026 | KT-5 *weight decay* | Tidak dikenakan pada bias dan `LayerNorm.weight` (BERT asli). Naskah 2.8.2 perlu satu kalimat karena (2.18) menulis θ umum | 8.1, pelatihan |
+| 12 | 21-10-2026 | KT-6 kepala klasifikasi | `AutoModelForSequenceClassification` bawaan: *pooler* (dense + tanh) hasil prapelatihan → *dropout* 0,1 → lapisan klasifikasi. Parameter baru hanya `classifier.weight`/`bias` (dicek di 8.1). Naskah (2.14) perlu keterangan bahwa h[CLS] adalah keluaran *pooler* | 8.1, pelatihan |
+| 13 | 21-10-2026 | KT-7 teknis pelatihan | `wl.pakai_konfig(CFG)` di setiap sel pelatihan (L_max dari `tahap07_tokenisasi.json`); *batch* evaluasi = B; FP32 penuh; `num_workers=0`; `fitness()` memakai `label_akhir`; tebakan = argmax (seri → kelas 0); uji cepat 8.1 mengecek dua pelatihan *seed* sama identik. SDPA bawaan dipertahankan: di torch 2.11 mode deterministik menonaktifkan SDPA cuDNN dan memaksa *backward* *memory-efficient* deterministik | 8.1, pelatihan |
 
 **Peta nomor tahap (Bagian 5–6 → program = Bab III).** Awalan nama berkas `tahapXX_` mengikuti nomor baru. Rujukan nomor di Bagian 2–6 (larangan, subtahap GPU, cek determinisme) dibaca dengan peta ini; misalnya "*random search*/PSO sebelum Tahap 11 selesai" menjadi Tahap 10, dan subtahap GPU lama menjadi 8.2, 10, 11, 12.1, 13.
 
@@ -732,7 +735,8 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 | 5 | ✅ Selesai. Semua 7 cek ✅ |
 | 6.1 | ✅ Output Colab 6/6 ✅; dinyatakan valid setelah audit kebocoran 6.2 (diminta pengguna) |
 | 6.2 | ✅ Selesai. 7 + 5 cek ✅; 0 kebocoran. Data uji dikunci |
-| 7 | Output Colab 4 + 3 cek ✅ (L_max 128; terpotong hanya 2741). Muncul *warning* HF Hub "unauthenticated requests": Tahap 0.1 revisi 2 menambah `HF_HUB_VERBOSITY=error` dan `huggingface_hub.utils.logging.set_verbosity_error()`. Sel pemeriksaan akhir tambahan (identitas *tokenizer* vs Tabel 2.14, pemotongan, *padding*) menunggu output Colab |
+| 7 | ✅ Selesai. 4 + 3 cek ✅ + pemeriksaan akhir 8/8 ✅: L_max 128 dari latih saja; BertTokenizer 30.521 cocok dengan Tabel 2.14 dan 2.5.2; hanya 2741 terpotong (141 → 128); *padding* per *batch*. Tahap 0.1 revisi 2 menyenyapkan log HF Hub |
+| 8.1 | Kode dibuat (`%%writefile lib/wondr_latih.py` + uji cepat 40 baris). Lokal (torch 2.11 CPU, BERT mini): uji cepat 5/5 ✅ (GPU ⚠️ wajar), uji logika *early stopping*/jadwal (2.20)/grup *weight decay* lolos. Menunggu output Colab |
 
 **Catatan kerja:** saat menulis berkas lewat alat, urutan `\uXXXX` dapat berubah menjadi karakter aslinya. Setelah menulis sel yang memuat *escape* Unicode, periksa bahwa barisnya ASCII murni (pernah terjadi di Tahap 4 dan sudah diperbaiki).
 
