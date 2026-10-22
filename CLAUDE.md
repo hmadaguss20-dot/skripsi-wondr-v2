@@ -737,7 +737,7 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 | Subtahap | Status |
 |---|---|
 | 0.1 | ✅ Selesai (revisi 1, A100). Semua 4 cek ✅. Revisi 2 (Tahap 7): log HF Hub disenyapkan; versi `huggingface-hub` ikut dicatat |
-| 0.2 | ✅ Selesai (revisi 1: kunci `TARGET` mengikuti Bab III). Semua 4 cek ✅. Revisi 2 (22-10-2026): `rs_M` 30, PSO s = 6 (G_max 4), `TARGET` 11 = 30 kandidat / 60 pelatihan, 12.1 = 30 evaluasi; jumlah entri tetap (CFG 31, TARGET 18). Menunggu output Colab sel 2/2 |
+| 0.2 | ✅ Selesai (revisi 1: kunci `TARGET` mengikuti Bab III). Semua 4 cek ✅. Revisi 2 (22-10-2026): `rs_M` 30, PSO s = 6 (G_max 4), `TARGET` 11 = 30 kandidat / 60 pelatihan, 12.1 = 30 evaluasi; jumlah entri tetap (CFG 31, TARGET 18). Output Colab 4 cek ✅ (CFG 31, TARGET 18) |
 | 1.1 | ✅ Selesai. Semua 6 cek ✅ |
 | 1.2 | ✅ Selesai. Semua 13 cek ✅ |
 | 2 | ✅ Selesai. Semua 5 cek ✅ |
@@ -753,6 +753,7 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 | 9.1 | ✅ Selesai. Output Colab 4 cek ✅: kandidat latih 338 · kandidat validasi 57 · uji 656 · total 1.051; lembar A = B, teks = `text_clean`, label kosong, 1.051 `review_id` dan teks unik. Uji lokal: urutan identik antar-jalan; teks berawalan '=' / 'null' / angka tetap utuh; isian 0/1 terbaca int; lembar yang sudah diisi tidak ditimpa (`FileExistsError`). Lib baru `lib/wondr_anotasi.py`. KT-10 dianggap disetujui (sel dijalankan dan anotasi dikerjakan). Anotasi kedua anotator selesai 22-10-2026 |
 | 9.2 | ✅ Selesai. Output Colab 5 cek ✅. κ: kandidat latih 0,9552 (p_o 0,9941; 2 selisih) · kandidat validasi 1,0000 (0 selisih) · uji 0,9968 (1 selisih) · keseluruhan 0,9929 (p_o 0,9971; p_e 0,5991; 3 selisih); semua "Hampir sempurna". Program valid; kesepakatan sangat tinggi sehingga kemandirian anotasi diminta dikonfirmasi pengguna (sel pemeriksaan tambahan, hanya membaca). Sel pemeriksaan: SHA-256 beda; metadata pembuat dan *lastModifiedBy* sama; disimpan 00:08 dan 00:24 (22-10-2026); p_o 1-2 kata 1,0000 · 3-10 kata 0,9958 · >10 kata 0,9978. Pengguna menyatakan anotasi dilakukan terpisah (22-10-2026) |
 | 9.3 | ✅ Selesai. Output Colab 2 + 3 cek ✅: sepakat 1.048 · selisih 3 (diselesaikan 3); latih kandidat 338, berubah P→NP 186 · NP→P 21, Non-Positif 42,7% → 48,1%; validasi kandidat 57, berubah 37 · 5, 42,9% → 47,8%; uji 656 berlabel manual. Audit integritas (diminta pengguna): bukti kode + aritmetika; sel Audit A/B (hanya membaca) diuji lokal. Audit A 3/3 ✅ dan Audit B 5/5 ✅: selisih D0223, D0236 (latih, A 1/B 0) dan D0809 (uji, A 0/B 1) → semua label_final 1; sebaran label akhir latih 1.468/1.583, validasi 314/343, uji 393/263 (59,9% Non-Positif); id uji hanya di berkas yang diizinkan; `fitness()` hanya latih + validasi |
+| 9.4 | Sel ditulis dan diuji lokal (label tiruan): 2 + 2 cek ✅; gambar 4 batang bertumpuk 100%; acuan minimum = bentuk tertutup q dan q/(1+q). Menunggu persetujuan KT-13 dan output Colab (perkiraan acuan: mayoritas latih Positif, akurasi validasi 0,5221, *Macro F1* 0,3430) |
 
 **Catatan kerja:** saat menulis berkas lewat alat, urutan `\uXXXX` dapat berubah menjadi karakter aslinya. Setelah menulis sel yang memuat *escape* Unicode, periksa bahwa barisnya ASCII murni (pernah terjadi di Tahap 4 dan sudah diperbaiki).
 
