@@ -787,3 +787,83 @@ Kerjakan **Tahap 0.1 saja** dengan format balasan di Bagian 2, lalu tunggu outpu
 **Verifikasi lokal dengan data asli (21-10-2026):** `data_wonder_bybni_3.xlsx` dari pengguna (SHA-256 awal `1bbda628c39b0095`; tidak di-*commit*), dijalankan dengan versi numpy/pandas/scikit-learn/scipy/pyarrow/openpyxl/matplotlib yang sama dengan Colab. Sel 1.1: 6/6 cek ✅. Kode acuan Bagian 7: perubahan per langkah 55 · 404 · 1.518 · 227 · 634 · 403; kosong 63 (*rating* 5: 57, 4: 6); 7.141 → 4.372 kunci (8 seri) → 4.364 dokumen → 4.293 grup → latih 3.051 (1.303/1.748) · validasi 657 (282/375) · uji 656 (280/376); kelima kembaran-dekat di uji. Semua cocok dengan target.
 
 **Lingkungan Colab (output Tahap 0.1, 21 Oktober 2026):** Python 3.13.15 · NVIDIA A100-SXM4-40GB 39,5 GB · CUDA 13.0 · cuDNN 92700 · numpy 2.1.3 · pandas 2.2.3 · torch 2.11.0+cu130 · transformers 5.20.1 · tokenizers 0.23.3 · scikit-learn 1.6.1 · scipy 1.16.3 · matplotlib 3.10.0 · openpyxl 3.1.5 · pyarrow 23.0.1.
+
+---
+
+## 11. Program v4 — keputusan final (13 November 2026)
+
+Bagian ini berlaku untuk **program v4** (data baru) dan **menggantikan Bagian 1–10** bila bertentangan. Urutan berlaku: `PROMPT_FINAL_13NOV.md` (F1–F14) > `REVISI_BRODY.md` > `REVISI_30OKT.md` > Bagian 1–10. `REVISI_12NOV.md` (R17–R28) beserta adendumnya **sudah digantikan** F1–F14. Berkas revisi (`REVISI_*.md`, `PROMPT_FINAL_13NOV.md`) tidak di-*commit*; isinya diringkas di sini.
+
+### 11.1 Berkas
+
+| Berkas | Isi |
+|---|---|
+| `skripsi_wondr_v4_colab.ipynb` | **Program utama** Colab, Tahap 0–15 (bagian A–G), sel teks "Cara menjalankan" dan titik berhenti |
+| `kaggle_pencarian.ipynb` | Program pembantu Kaggle K0–K4: *random search* 5 *run* (F10) |
+| `skripsi_wondr_v4.ipynb` | Arsip v4 lengkap: sel audit tambahan, sel RS lama (10 *run*, tanpa pengaman T4) seperti yang dijalankan |
+| `kaggle_audit_langkah1.ipynb` | Arsip audit Langkah 1b (digantikan K0) |
+
+Folder Drive: `MyDrive/skripsi_wondr_v4/` dengan tambahan `model/` (bobot Tahap 13), `kaggle/` (paket dan keluaran), `log/arsip_fp32/`, `hasil/arsip_fp32/`.
+
+### 11.2 Keputusan final F1–F14
+
+| No. | Keputusan |
+|---|---|
+| F1 | Tahap 1–9 final; sel tetap di notebook bertanda "sudah dijalankan, jangan diulang" |
+| F2 | RS: 5 *run* (*seed* 1–5), 40 kandidat per *run*; `F = default_rng(s).random((50, 3))` (cocok dengan *state* lama), dievaluasi k = 0–39 (= `random((40, 3))`) |
+| F3 | PSO: 5 *run* (*seed* 11–15), s = 10, G_max = 3 → 40 evaluasi; parameter lain Tabel 3.2; X0 = U(0,1) lalu V0 = U(−1,1) lalu r₁, r₂ per iterasi dari `default_rng(seed)` |
+| F4 | *Fitness* = rata-rata Macro F1 validasi terbaik *seed* 42 dan 43; model akhir 3 skema × *seed* 44–48 = 15; *bootstrap* R = 10.000, `default_rng(42)`, Bonferroni m = 3, selang 98,33% |
+| F5 | Total pelatihan Tahap 10–13 = 2 + 400 + 400 + 15 = 817 |
+| F6 | AMP FP16 lewat `CFG["amp"]` (awal `None`; sel pelatihan berhenti selama `None`); syarat `True`: dua pelatihan identik dan ≥ 1,2× lebih cepat (Tahap 10.0) |
+| F7 | `VERSI` sama persis di Tahap 0.1 dan K0: torch 2.14.1+cu130, transformers 5.22.1, tokenizers 0.23.3, huggingface-hub 1.33.0, numpy 2.4.6, pandas 2.2.3, scikit-learn 1.6.1, scipy 1.16.3, pyarrow 23.0.1; revisi IndoBERT `c2cd0b51ddce6580eb35263b39b0a1e5fb0a39e2`; setiap evaluasi mencatat lingkungan (platform, GPU, python, torch, cuda, cudnn, transformers, tokenizers, numpy, amp, revisi) |
+| F8 | Tahap 10 selalu dijalankan ulang di lingkungan terkunci; bila `amp = False` harus identik dengan Tahap 10 FP32 sebelumnya |
+| F9 | *State* RS lama (FP32, 32 kandidat) dipakai hanya bila `amp = False` dan lingkungan = `VERSI`; selain itu dipindah ke `arsip_fp32/` bersama Tahap 10 lama |
+| F10 | RS di Kaggle, PSO dan tahap lain di Colab, hanya bila uji kesetaraan K2 identik persis; bila gagal semua di Colab bergantian (`MAKS_RUN = 1`); Kaggle boleh mengambil PSO dari *seed* terbesar lewat `TUGAS` |
+| F11 | Satu T4: setiap sel GPU diawali `wl.pastikan_t4()`; Kaggle `CUDA_VISIBLE_DEVICES=0`; P100 tidak dipakai |
+| F12 | Tahap 12.2 deskriptif; **tanpa** uji Mann–Whitney |
+| F13 | Bobot model akhir disimpan, `CFG["simpan_bobot"]` = `"semua"` (15 model, ±7,5 GB), `"terbaik"`, atau `"tidak"` |
+| F14 | Data uji tidak dipakai sebelum Tahap 14 dan tidak dikirim ke Kaggle; tidak ada berkas yang dihapus (dipindah ke `arsip_fp32/`) |
+
+### 11.3 Keputusan v4 sebelumnya yang tetap berlaku
+
+- `REVISI_30OKT.md`: data `review_wondr_bni_databaruu.csv` 9.672 ulasan (R1); folder `skripsi_wondr_v4/` (R2); *seed* (R3); anotasi oleh dua penutur asli, κ dihitung sebelum diskusi, TS → 0 (R8); cek kunci gabungan Tahap 5 (R9); kembaran-dekat dihapus (R10); GPU T4 (R11); nomor persamaan Bagian 6 (R12); model akhir 15 (R6); uji signifikansi pada selisih rata-rata 5 *seed* + Δ_j + δ_min (R7).
+- `REVISI_BRODY.md` R13–R16: normalisasi pemanjangan kata Brody (kamus beku, ambang 10), cek dampak kamus.
+- 31-10: L_max = 160 (pers. 2.9; maksimum latih 141). Huruf ganda (tepat 2) tidak dinormalisasi.
+- 10-11: anotasi diisi manual oleh dua anotator (pernyataan pengguna); κ keseluruhan 0,7618; `selisih.xlsx`: 1 = 108, 0 = 9, TS = 3.
+- 13-11: anggaran 40 tetap (tanpa Tahap B); pengaman T4 di sel RS lama terhapus tanpa sengaja (semua 32 kandidat tetap tercatat T4); Mann–Whitney dihapus.
+- Keputusan teknis program final: GPU dicek dengan `pastikan_t4()`; catatan lingkungan FP32 lama (5 kunci) dibandingkan pada kunci yang sama (`lingkungan_sama`); aturan gabung mengecualikan durasi dan catatan lingkungan; `n_lewat` yang tidak tercatat dibaca 0; versi torch dibaca dari `torch/version.py` (akhiran +cu130) tanpa meng-*import* torch; Tahap 10 menyalin Tahap 10 FP32 lama ke `hasil/arsip_fp32/` sebelum menimpa; simpan_bobot `"terbaik"` melatih ulang 5 model skema terbaik (deterministik, dicek identik).
+
+### 11.4 Konfigurasi akhir (`CFG`, Tahap 0.2)
+
+| Kunci | Nilai |
+|---|---|
+| `gpu`, `checkpoint`, `revisi` | T4 · `indobenchmark/indobert-base-p1` · `c2cd0b51…a39e2` |
+| `versi`, `amp`, `amp_percepatan_min` | `VERSI` (F7) · `None` → True/False (F6) · 1,2 |
+| B, E, p, v · AdamW | 16, 4, 2, 1,0 · β (0,9; 0,999), ε 1e-8 |
+| `default` · `ruang` | lr 2e-5, wr 0,1, wd 0,01 · lr [1e-5; 5e-5] log, wr [0; 0,2], wd [0; 0,3] |
+| `seed_fitness` · `rs_seeds` · `pso_seeds` · `seed_akhir` | (42, 43) · 1–5 · 11–15 · 44–48 |
+| `rs_M`, `rs_F` | 40, 50 |
+| `pso` | s 10, G_max 3, ω 0,729, c₁ = c₂ 1,49445, V_max 1,0 |
+| `simpan_bobot`, `kaggle_batas_jam` | `"semua"`, 11 |
+| `R`, `seed_bootstrap`, `alpha`, `m_uji` | 10.000, 42, 0,05, 3 |
+
+### 11.5 Status (13-11-2026)
+
+| Bagian | Status |
+|---|---|
+| 0.1–9.4 | ✅ Selesai di T4 (CL 31-10 dengan torch 2.11.0/transformers 5.21.0; Tahap 1–9.4 dijalankan ulang 10-11, semua cek ✅) |
+| Audit Langkah 1a | ✅ Colab: torch 2.14.1+cu130 · transformers 5.22.1 · cuDNN 92800 · Python 3.13.16; RS *run* 1 32 kandidat (T4; terbaik k 15, 0,9282); Tahap 10 FP32 0,9276132201223842; revisi Hub `c2cd0b51…` (commit 2021-05-19) |
+| 10.0–15 dan K0–K4 | Ditulis lengkap 13-11 dan diuji lokal di CPU (torch 2.14.1, transformers 5.22.1, BERT kecil, data tiruan): uji unit 20/20 ✅; uji alur 0.1→15 dengan simulasi Kaggle K0–K4, dua skenario F9, 63 cek ✅ per skenario (⚠️ hanya karena tanpa GPU dan model kecil); ringkasan dan evaluasi dengan nilai bervariasi ✅; struktur notebook 9/9 ✅; Bagian B notebook final pada data asli 82 cek ✅. **Belum dijalankan di GPU** (kecepatan AMP, kesetaraan Kaggle–Colab, IndoBERT asli diuji saat dijalankan) |
+
+### 11.6 Catatan untuk naskah
+
+- Tabel 3.1–3.2 dan Bab III tahap 11–12: RS 5 *run* × 40 kandidat (*seed* 1–5); PSO 5 *run* (*seed* 11–15), s = 10, G_max = 3, 40 evaluasi; pemilihan antar-*run* (R5).
+- Bab III tahap 7: L_max 128 → 160. Bab III tahap 13–15: 5 *seed* (44–48), 15 model, uji pada selisih rata-rata 5 *seed*.
+- Bab III lingkungan: `VERSI`, revisi *checkpoint*, AMP bila dipakai; *confident learning* (31-10) memakai torch 2.11.0/transformers 5.21.0, sedangkan Tahap 10–13 memakai `VERSI`.
+- Nomor persamaan di komentar kode mengikuti `REVISI_30OKT.md` Bagian 6; PDF di `naskah/` (21-10) masih memakai nomor lama.
+- Tahap 12.2 deskriptif; rumusan masalah ketiga dijawab Tahap 15.
+
+### 11.7 Menunggu pengguna
+
+- Output K0 Kaggle (*driver* CUDA, Python, pemasangan `VERSI`).
+- Keputusan `CFG["amp"]` setelah Tahap 10.0.
