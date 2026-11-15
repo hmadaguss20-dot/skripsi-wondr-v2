@@ -802,6 +802,7 @@ Bagian ini berlaku untuk **program v4** (data baru) dan **menggantikan Bagian 1�
 | `kaggle_pencarian.ipynb` | Program pembantu Kaggle K0–K4: *random search* 5 *run* (F10) |
 | `skripsi_wondr_v4.ipynb` | Arsip v4 lengkap: sel audit tambahan, sel RS lama (10 *run*, tanpa pengaman T4) seperti yang dijalankan |
 | `kaggle_audit_langkah1.ipynb` | Arsip audit Langkah 1b (digantikan K0) |
+| `PANDUAN_MENJALANKAN.md` | Panduan langkah demi langkah untuk pengguna (15-11): Kaggle K0–K4 (Jalur A) atau RS di Colab (Jalur B), PSO 12.1, 11.2–12.2, 13, 14.1–15, target cek per sel, tabel masalah |
 
 Folder Drive: `MyDrive/skripsi_wondr_v4/` dengan tambahan `model/` (bobot Tahap 13), `kaggle/` (paket dan keluaran), `log/arsip_fp32/`, `hasil/arsip_fp32/`.
 
@@ -871,4 +872,4 @@ Folder Drive: `MyDrive/skripsi_wondr_v4/` dengan tambahan `model/` (bobot Tahap 
 
 ### 11.7 Menunggu pengguna
 
-- Output Kaggle K0 → K1 → K2 dengan paket 10.1 (dataset *Private*); target K2 identik persis. Setelah itu persetujuan 12.1 PSO di Colab (±400 pelatihan) dan *commit* RS di Kaggle.
+- Pengguna menjalankan sendiri sesuai `PANDUAN_MENJALANKAN.md` (15-11): K0 → K1 → K2 interaktif, lalu Jalur A (RS *commit* Kaggle + PSO 12.1 Colab bersamaan) atau Jalur B (11.1 + 12.1 `MAKS_RUN = 1`), lalu 11.2 → 15. 12.1 PSO dan *commit* RS disetujui lewat panduan (perkiraan ±19 jam per metode, Hitungan 2,89 menit per pelatihan). Saat pengguna kembali: minta output sesuai panduan Bagian 10.1 dan analisis terhadap target di panduan Bagian 3–9.
