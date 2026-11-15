@@ -855,6 +855,8 @@ Folder Drive: `MyDrive/skripsi_wondr_v4/` dengan tambahan `model/` (bobot Tahap 
 | Audit Langkah 1a | ✅ Colab: torch 2.14.1+cu130 · transformers 5.22.1 · cuDNN 92800 · Python 3.13.16; RS *run* 1 32 kandidat (T4; terbaik k 15, 0,9282); Tahap 10 FP32 0,9276132201223842; revisi Hub `c2cd0b51…` (commit 2021-05-19) |
 | 10.0–15 dan K0–K4 | Ditulis lengkap 13-11 dan diuji lokal di CPU (torch 2.14.1, transformers 5.22.1, BERT kecil, data tiruan): uji unit 20/20 ✅; uji alur 0.1→15 dengan simulasi Kaggle K0–K4, dua skenario F9, 63 cek ✅ per skenario (⚠️ hanya karena tanpa GPU dan model kecil); ringkasan dan evaluasi dengan nilai bervariasi ✅; struktur notebook 9/9 ✅; Bagian B notebook final pada data asli 82 cek ✅. **Belum dijalankan di GPU** (kecepatan AMP, kesetaraan Kaggle–Colab, IndoBERT asli diuji saat dijalankan) |
 
+| Audit K0 Kaggle (15-11) | *Driver* 580.178.04, CUDA 13.0 · Python 3.13.16 (= Colab) · bawaan torch 2.11.0+cu130, transformers 5.20.2, numpy 2.1.3, pandas 2.3.3 → setelah pemasangan = `VERSI` ✅ · 1 Tesla T4 terlihat ✅ · ⚠️ numpy 2.1.3 sudah dimuat Kaggle sebelum K0 → numpy 2.4.6 dipasang lewat *Dependency Manager* (berlaku juga untuk *commit*) · cuDNN Kaggle 92400 vs Colab 92800 (dicatat; kesetaraan diputuskan K2) |
+
 ### 11.6 Catatan untuk naskah
 
 - Tabel 3.1–3.2 dan Bab III tahap 11–12: RS 5 *run* × 40 kandidat (*seed* 1–5); PSO 5 *run* (*seed* 11–15), s = 10, G_max = 3, 40 evaluasi; pemilihan antar-*run* (R5).
@@ -865,5 +867,5 @@ Folder Drive: `MyDrive/skripsi_wondr_v4/` dengan tambahan `model/` (bobot Tahap 
 
 ### 11.7 Menunggu pengguna
 
-- Output K0 Kaggle (*driver* CUDA, Python, pemasangan `VERSI`).
+- Output K0 Kaggle setelah numpy 2.4.6 dipasang lewat *Dependency Manager* (semua cek ✅).
 - Keputusan `CFG["amp"]` setelah Tahap 10.0.
